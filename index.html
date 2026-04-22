@@ -3,39 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ramalan Primbon Jawa</title>
+<title>Primbon Jawa Premium</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-body { font-family: sans-serif; }
+body { font-family: 'Poppins', sans-serif; }
 </style>
 </head>
 
-<body class="bg-gradient-to-br from-purple-900 to-black text-white min-h-screen flex items-center justify-center">
+<body class="bg-gradient-to-br from-black via-gray-900 to-black text-white min-h-screen">
 
-<div class="bg-white/10 backdrop-blur-lg p-6 rounded-2xl w-96 text-center">
-
-  <!-- LOGO -->
+<!-- HEADER -->
+<header class="text-center py-6 border-b border-gray-800 backdrop-blur">
   <img src="logo.png"
-       class="w-20 h-20 mx-auto mb-3 rounded-full object-cover shadow-lg">
+       class="w-16 h-16 mx-auto mb-2 rounded-full object-cover shadow-lg">
+  <h1 class="text-xl font-semibold tracking-wide">Primbon Jawa</h1>
+  <p class="text-sm text-gray-400">Ramalan Tradisional Modern</p>
+</header>
 
-  <h1 class="text-2xl font-bold mb-1">Ramalan Primbon</h1>
-  <p class="text-sm opacity-80 mb-4">Berdasarkan Tanggal Lahir</p>
+<div class="max-w-2xl mx-auto px-4 py-6">
 
-  <!-- INPUT -->
-  <input type="text" id="tgl"
-    placeholder="Contoh: 17-08-1995"
-    class="w-full p-3 rounded-xl text-black mb-3">
+  <!-- ARTIKEL -->
+  <div class="bg-white/5 backdrop-blur-xl p-5 rounded-2xl border border-white/10 mb-6">
+    <h2 class="text-lg font-semibold mb-2">Tentang Primbon</h2>
+    <p class="text-sm text-gray-300 leading-relaxed">
+      Primbon Jawa adalah warisan budaya yang digunakan untuk membaca karakter,
+      asmara, dan rezeki berdasarkan weton kelahiran. Digunakan sebagai panduan hidup
+      oleh masyarakat Jawa sejak dahulu.
+    </p>
+  </div>
 
-  <button onclick="hitung()"
-    class="w-full bg-purple-500 p-3 rounded-xl font-semibold">
-    Lihat Ramalan
-  </button>
+  <!-- FORM -->
+  <div class="bg-white/5 backdrop-blur-xl p-5 rounded-2xl border border-white/10">
 
-  <div id="hasil" class="mt-4 text-left"></div>
+    <h2 class="text-lg font-semibold mb-3 text-center">Cek Ramalan Anda</h2>
+
+    <input type="text" id="tgl"
+      placeholder="Contoh: 17-08-1995"
+      class="w-full p-3 rounded-xl bg-black/40 border border-gray-700 text-white mb-3 outline-none focus:border-purple-500">
+
+    <button onclick="hitung()"
+      class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 p-3 rounded-xl font-semibold hover:scale-105 transition">
+      🔮 Lihat Ramalan
+    </button>
+
+  </div>
+
+  <!-- HASIL -->
+  <div id="hasil" class="mt-6 space-y-4"></div>
 
 </div>
+
+<!-- FOOTER -->
+<footer class="text-center text-xs text-gray-500 py-5 border-t border-gray-800">
+  © 2026 OkyRaya • Primbon Premium
+</footer>
 
 <script>
 function hitung(){
@@ -67,35 +92,60 @@ function hitung(){
 
   let sifat="", asmara="", karir="";
 
-  // SIFAT
   if(total <= 10){
-    sifat = "Tenang, sabar, cenderung pendiam.";
-    asmara = "Setia, namun sulit mengungkapkan perasaan.";
-    karir = "Cocok di pekerjaan stabil seperti administrasi atau keuangan.";
+    sifat = "Tenang, sabar, dan cenderung pendiam.";
+    asmara = "Setia namun sulit mengungkapkan perasaan.";
+    karir = "Cocok di pekerjaan stabil dan terstruktur.";
   }
   else if(total <= 15){
-    sifat = "Pekerja keras, bertanggung jawab.";
+    sifat = "Pekerja keras dan bertanggung jawab.";
     asmara = "Romantis dan serius dalam hubungan.";
-    karir = "Berpotensi sukses di bisnis atau pekerjaan lapangan.";
+    karir = "Potensi sukses di bisnis atau kerja lapangan.";
   }
   else{
-    sifat = "Pemimpin, kuat, berani ambil keputusan.";
-    asmara = "Dominan dalam hubungan, perlu belajar memahami pasangan.";
-    karir = "Cocok jadi pemimpin, pengusaha, atau manajer.";
+    sifat = "Pemimpin, berani, dan tegas.";
+    asmara = "Dominan dalam hubungan, perlu keseimbangan.";
+    karir = "Cocok jadi pemimpin atau pengusaha.";
   }
 
   document.getElementById("hasil").innerHTML = `
-    <div class="mt-3 p-3 bg-white/10 rounded-xl">
-      <b>Hari Lahir:</b> ${h}<br>
-      <b>Pasaran:</b> ${p}<br>
-      <b>Neptu:</b> ${total}<br><br>
-
-      <b>Sifat:</b><br>${sifat}<br><br>
-
-      <b>Asmara & Percintaan:</b><br>${asmara}<br><br>
-
-      <b>Karier & Rezeki:</b><br>${karir}
+    
+    <!-- CARD INFO -->
+    <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+      <div class="grid grid-cols-3 gap-3 text-center text-sm">
+        <div>
+          <div class="text-gray-400">Hari</div>
+          <div class="font-semibold">${h}</div>
+        </div>
+        <div>
+          <div class="text-gray-400">Pasaran</div>
+          <div class="font-semibold">${p}</div>
+        </div>
+        <div>
+          <div class="text-gray-400">Neptu</div>
+          <div class="font-semibold text-purple-400">${total}</div>
+        </div>
+      </div>
     </div>
+
+    <!-- SIFAT -->
+    <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+      <h3 class="font-semibold mb-1 text-purple-400">Sifat</h3>
+      <p class="text-sm text-gray-300">${sifat}</p>
+    </div>
+
+    <!-- ASMARA -->
+    <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+      <h3 class="font-semibold mb-1 text-pink-400">Asmara</h3>
+      <p class="text-sm text-gray-300">${asmara}</p>
+    </div>
+
+    <!-- KARIR -->
+    <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+      <h3 class="font-semibold mb-1 text-yellow-400">Karier</h3>
+      <p class="text-sm text-gray-300">${karir}</p>
+    </div>
+
   `;
 }
 </script>
