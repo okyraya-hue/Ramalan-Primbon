@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ramalan Primbon Jawa</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body { font-family: sans-serif; }
+</style>
+</head>
+
+<body class="bg-gradient-to-br from-purple-900 to-black text-white min-h-screen flex items-center justify-center">
+
+<div class="bg-white/10 backdrop-blur-lg p-6 rounded-2xl w-96 text-center">
+
+  <!-- LOGO -->
+  <img src="logo.png"
+       class="w-20 h-20 mx-auto mb-3 rounded-full object-cover shadow-lg">
+
+  <h1 class="text-2xl font-bold mb-1">Ramalan Primbon</h1>
+  <p class="text-sm opacity-80 mb-4">Berdasarkan Tanggal Lahir</p>
+
+  <!-- INPUT -->
+  <input type="text" id="tgl"
+    placeholder="Contoh: 17-08-1995"
+    class="w-full p-3 rounded-xl text-black mb-3">
+
+  <button onclick="hitung()"
+    class="w-full bg-purple-500 p-3 rounded-xl font-semibold">
+    Lihat Ramalan
+  </button>
+
+  <div id="hasil" class="mt-4 text-left"></div>
+
+</div>
+
+<script>
+function hitung(){
+  let input = document.getElementById("tgl").value;
+
+  if(!input){
+    alert("Masukkan tanggal dulu!");
+    return;
+  }
+
+  let parts = input.split("-");
+  if(parts.length !== 3){
+    alert("Format harus DD-MM-YYYY");
+    return;
+  }
+
+  let tgl = new Date(parts[2], parts[1]-1, parts[0]);
+
+  const hari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+  const pasaran = ["Legi","Pahing","Pon","Wage","Kliwon"];
+
+  let h = hari[tgl.getDay()];
+  let p = pasaran[tgl.getDate() % 5];
+
+  let neptuHari = {Minggu:5, Senin:4, Selasa:3, Rabu:7, Kamis:8, Jumat:6, Sabtu:9};
+  let neptuPasaran = {Legi:5, Pahing:9, Pon:7, Wage:4, Kliwon:8};
+
+  let total = neptuHari[h] + neptuPasaran[p];
+
+  let sifat="", asmara="", karir="";
+
+  // SIFAT
+  if(total <= 10){
+    sifat = "Tenang, sabar, cenderung pendiam.";
+    asmara = "Setia, namun sulit mengungkapkan perasaan.";
+    karir = "Cocok di pekerjaan stabil seperti administrasi atau keuangan.";
+  }
+  else if(total <= 15){
+    sifat = "Pekerja keras, bertanggung jawab.";
+    asmara = "Romantis dan serius dalam hubungan.";
+    karir = "Berpotensi sukses di bisnis atau pekerjaan lapangan.";
+  }
+  else{
+    sifat = "Pemimpin, kuat, berani ambil keputusan.";
+    asmara = "Dominan dalam hubungan, perlu belajar memahami pasangan.";
+    karir = "Cocok jadi pemimpin, pengusaha, atau manajer.";
+  }
+
+  document.getElementById("hasil").innerHTML = `
+    <div class="mt-3 p-3 bg-white/10 rounded-xl">
+      <b>Hari Lahir:</b> ${h}<br>
+      <b>Pasaran:</b> ${p}<br>
+      <b>Neptu:</b> ${total}<br><br>
+
+      <b>Sifat:</b><br>${sifat}<br><br>
+
+      <b>Asmara & Percintaan:</b><br>${asmara}<br><br>
+
+      <b>Karier & Rezeki:</b><br>${karir}
+    </div>
+  `;
+}
+</script>
+
+</body>
+</html>
